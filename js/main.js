@@ -18,3 +18,6 @@ const isShort = (checkedString, maxLength) => {
   }
   return checkedString.length <= maxLength;
 };
+
+getRandomNum(3, 7);
+isShort('шалом', 3);
