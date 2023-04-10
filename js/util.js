@@ -1,4 +1,4 @@
-const getRandomNum = (from, to) => {
+const getRandomNumber = (from, to) => {
   if (typeof from !== 'number' || typeof to !== 'number' || from < 0 || to < 0) {
     return ('Ожидаю введения неотрицательных чисел');
   }
@@ -11,7 +11,7 @@ const getRandomNum = (from, to) => {
   return Math.floor(Math.random() * (to + 1 - from)) + from;
 };
 
-const getRandomArrayElement = (elements) => elements[getRandomNum(0, elements.length - 1)];
+const getRandomElementOfArray = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
 const isShort = (checkedString, maxLength) => {
   checkedString = String(checkedString);
@@ -22,4 +22,4 @@ const isShort = (checkedString, maxLength) => {
 };
 
 isShort();
-export {getRandomArrayElement, getRandomNum};
+export {getRandomElementOfArray, getRandomNumber};
