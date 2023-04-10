@@ -1,6 +1,8 @@
 {
   "name": "kekstagram",
   "version": "26.0.0",
+  "type": "module",
+  "__COMMENT__": "Выше строка - тайпмодул, шоб ВШ мог отображать из модулей ",
   "private": true,
   "description": "Личный проект «Кекстаграм» от HTML Academy",
   "repository": {

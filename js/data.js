@@ -1,4 +1,4 @@
-import {getRandomArrayElement, getRandomNum} from './util.js';
+import {getRandomElementOfArray, getRandomNumber} from './util.js';
 
 const TOPIC_COUNT = 25;
 const MESSAGES = [
@@ -18,31 +18,27 @@ const NAMES = [
   'Тамара Витальевна',
 ];
 const createComment = () => ({
-  id: getRandomNum(0, 99), /* далее от него рандомно + 0-5*/
-  avatar: `img/avatar-${getRandomNum(1, 6)}.svg`,
-  message: getRandomArrayElement(MESSAGES),
-  name: getRandomArrayElement(NAMES),
+  id: getRandomNumber(0, 99), /* далее от него рандомно + 0-5*/
+  avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+  message: getRandomElementOfArray(MESSAGES),
+  name: getRandomElementOfArray(NAMES),
 });
-const createTopic = () => {
-  const comments = Array.from({length: getRandomNum(1, 4)}, createComment);
-  comments.forEach((comment, index) => {
-    if (index > 0) {/*  первый рандомный ид, далее рандомно от него + 1-5*/
-      comment.id = comments[index - 1].id + getRandomNum(1, 5);
+const createTopic = (index) => {
+  const comments = Array.from({length: getRandomNumber(1, 4)}, createComment);
+  comments.forEach((comment, ndx) => {
+    if (ndx > 0) {/*  первый рандомный ид, далее рандомно от него + 1-5*/
+      comment.id = comments[ndx - 1].id + getRandomNumber(1, 5);
     }
   });
   return {
-    id: 1 /*от 1 до 25 */,
-    url: 'dfgkjdfjkdfgkj',
+    id: index + 1 /*от 1 до 25 */,
+    url: `photos/${index + 1}.jpg`,
     description: 'фотография 9х12, с наивной подписью на память',
-    likes: getRandomNum(15, 200),
+    likes: getRandomNumber(15, 200),
     comments: comments
   };
 };
 
-const similarTopics = Array.from({length: TOPIC_COUNT}, createTopic);
-similarTopics.forEach((item, index) => {
-  item.id = index + 1;
-  item.url = `photos/${index + 1}.jpg`;
-});
+const similarTopics = Array.from({length: TOPIC_COUNT}, (_, i) => createTopic(i));
 
 export {similarTopics};
