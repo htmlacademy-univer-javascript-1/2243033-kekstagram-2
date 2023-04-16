@@ -1,6 +1,6 @@
-import {similarTopics} from './data.js';
-import './thumbnail.js';
+import {createSimilarTopics} from './data.js';
+import {similarTopicsCallback, containerForPictures, containerFragment} from './thumbnail.js';
 
-// eslint-disable-next-line no-console
-console.log(similarTopics);
-
+const similarTopic = createSimilarTopics();
+similarTopic.forEach((topic) => {similarTopicsCallback(topic);});
+containerForPictures.appendChild(containerFragment);
