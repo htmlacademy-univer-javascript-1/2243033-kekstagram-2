@@ -39,6 +39,6 @@ const createTopic = (index) => {
   };
 };
 
-const similarTopics = Array.from({length: TOPIC_COUNT}, (_, i) => createTopic(i));
+const createSimilarTopics = () => Array.from({length: TOPIC_COUNT}, (_, i) => createTopic(i));
 
-export {similarTopics};
+export {createSimilarTopics};
