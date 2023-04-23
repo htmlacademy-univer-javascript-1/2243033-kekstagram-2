@@ -1,8 +1,8 @@
 import {createSimilarTopics} from './data.js';
-import {similarTopicsCallback, containerForPictures, containerFragment} from './thumbnail.js';
+import {renderThumbnails} from './thumbnail.js';
 import './form-edit-photo.js';
 
-const similarTopic = createSimilarTopics();
-similarTopic.forEach((topic) => {similarTopicsCallback(topic);});
-containerForPictures.appendChild(containerFragment);
+const TOPIC_COUNT = 25;
+const similarTopics = createSimilarTopics(TOPIC_COUNT);
 
+renderThumbnails(similarTopics);

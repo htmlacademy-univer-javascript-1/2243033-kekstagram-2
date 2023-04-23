@@ -116,10 +116,11 @@
               <!-- Добавление хэш-тегов и комментария к изображению -->
               <fieldset class="img-upload__text text">
                 <div class="img-upload__field-wrapper">
-                  <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
+                  <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег" value="">
                 </div>
                 <div class="img-upload__field-wrapper">
-                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>
+                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..." value="" maxlength="140"></textarea>
+                  <div class="remaining"> </div>
                 </div>
               </fieldset>
 
@@ -173,7 +174,7 @@
         <div class="social__footer">
           <img class="social__picture" src="img/avatar-6.svg" alt="Аватар комментатора фотографии" width="35" height="35">
           <input type="text" class="social__footer-text" placeholder="Ваш комментарий...">
-          <button type="submit" class="social__footer-btn" name="button">Отправить</button>  <-- было type="button"-->
+          <button type="submit" class="social__footer-btn" name="button">Отправить</button>  <!-- было type="button"-->
         </div>
       </div>
 
@@ -231,7 +232,7 @@
 <template id="messages">
   <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
 </template>
-<script src="pristine/pristine.js"></script>
+<script src="./pristine/pristine.min.js"></script>
 <script src="./js/main.js" type="module"></script>
 </body>
 </html>

@@ -15,4 +15,9 @@ const similarTopicsCallback = (topic) => {
   containerFragment.appendChild(topicElement);
 };
 
-export {similarTopicsCallback, containerForPictures, containerFragment};
+const renderThumbnails = (similarTopics) => {
+  similarTopics.forEach((topic) => {similarTopicsCallback(topic);});
+  containerForPictures.appendChild(containerFragment);
+};
+
+export {renderThumbnails};
