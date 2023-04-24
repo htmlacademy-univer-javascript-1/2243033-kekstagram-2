@@ -11,13 +11,17 @@ const isCommentOff = (comments) => {
   }
 };
 
-const buttonCommentsLoaderClickHandler = (comments) => {
+const buttonCommentsLoaderClickHandler = () => {
   Array.from(document.querySelectorAll('.social__comments .hidden')).forEach((el, ndx) => {
     if (ndx <=4) {
       el.classList.remove('hidden');
     }
   });
-  isCommentOff(comments);
+  buttonCommentsLoader.classList.add('hidden');
+  if (fullSizeView.querySelector('.social__comments .hidden')) {
+    buttonCommentsLoader.classList.remove('hidden');
+  }
+  fullSizePhotoSocial.querySelector('.social__comment-count').innerHTML = `${Array.from(document.querySelectorAll('.social__comment')).length - Array.from(document.querySelectorAll('.social__comments .hidden')).length} из <span className="comments-count">${Array.from(document.querySelectorAll('.social__comment')).length}</span> комментариев`;
 };
 
 const renderFullSizePhoto = (url, description, likes, comments) => {
