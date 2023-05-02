@@ -6,28 +6,28 @@ const hashtagsField = formEditPhoto.querySelector('.text__hashtags');
 const commentField = formEditPhoto.querySelector('.text__description');
 const remaining = formEditPhoto.querySelector('.remaining');
 
-const PopupEscKeydownHandler = (evt) => {
+const popupEscKeydownHandler = (evt) => {
   if (evt.key === 'Escape' && hashtagsField !== document.activeElement && commentField !== document.activeElement) {
     evt.preventDefault();
-    closeEditPhoto();
+    closeEditPhotoHandler();
   }
 };
-function openEditPhoto ()  {
+function openEditPhotoHandler ()  {
   elementImgUpload.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  document.body.addEventListener('keydown', PopupEscKeydownHandler);
+  document.addEventListener('keydown', popupEscKeydownHandler);
 }
 
-function closeEditPhoto () {
+function closeEditPhotoHandler () {
   elementImgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  document.body.removeEventListener('keydown', PopupEscKeydownHandler);
+  document.removeEventListener('keydown', popupEscKeydownHandler);
   controlUploadFile.value = '';
 }
 
-controlUploadFile.addEventListener('change', openEditPhoto);
+controlUploadFile.addEventListener('change', openEditPhotoHandler);
 
-buttonCloseEditPhoto.addEventListener('click', closeEditPhoto);
+buttonCloseEditPhoto.addEventListener('click', closeEditPhotoHandler);
 
 
 const pristine = new Pristine(formEditPhoto, {
@@ -35,7 +35,7 @@ const pristine = new Pristine(formEditPhoto, {
   errorClass: 'img-upload__field-wrapper--invalid',
   successClass: 'img-upload__field-wrapper--valid',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextTag: 'span',
+  errorTextTag: 'div',
   errorTextClass: 'form__error',
 });
 
