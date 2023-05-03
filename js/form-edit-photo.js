@@ -12,12 +12,12 @@ const popupEscKeydownHandler = (evt) => {
     closeEditPhotoHandler();
   }
 };
-const closeEditPhotoHandler = () => {
+function closeEditPhotoHandler() {
   elementImgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', popupEscKeydownHandler);
   controlUploadFile.value = '';
-};
+}
 const openEditPhotoHandler = () => {
   elementImgUpload.classList.remove('hidden');
   document.body.classList.add('modal-open');
