@@ -23,7 +23,6 @@ const buttonCommentsLoaderClickHandler = () => {
   }
   fullSizePhotoSocial.querySelector('.social__comment-count').innerHTML = `${Array.from(document.querySelectorAll('.social__comment')).length - Array.from(document.querySelectorAll('.social__comments .hidden')).length} из <span className="comments-count">${Array.from(document.querySelectorAll('.social__comment')).length}</span> комментариев`;
 };
-
 const renderFullSizePhoto = (url, description, likes, comments) => {
   fullSizeView.classList.remove('hidden');
   fullSizePhoto.querySelector('img').src = url;
@@ -44,6 +43,11 @@ const renderFullSizePhoto = (url, description, likes, comments) => {
   });
   buttonCommentsLoader.addEventListener('click', buttonCommentsLoaderClickHandler);
   isCommentOff(comments);
+  fullSizeView.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('big-picture')) {
+      fullSizeView.classList.add('hidden');
+    }
+  });
   return fullSizeView;
 };
 
@@ -59,4 +63,5 @@ buttonCloseFullSizePhoto.addEventListener('click', () => {
   fullSizeView.classList.add('hidden');
   document.body.classList.remove('modal-open');
 });
+
 export {renderFullSizePhoto};

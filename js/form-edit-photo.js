@@ -12,18 +12,17 @@ const popupEscKeydownHandler = (evt) => {
     closeEditPhotoHandler();
   }
 };
-function openEditPhotoHandler ()  {
-  elementImgUpload.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-  document.addEventListener('keydown', popupEscKeydownHandler);
-}
-
-function closeEditPhotoHandler () {
+const closeEditPhotoHandler = () => {
   elementImgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', popupEscKeydownHandler);
   controlUploadFile.value = '';
-}
+};
+const openEditPhotoHandler = () => {
+  elementImgUpload.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown', popupEscKeydownHandler);
+};
 
 controlUploadFile.addEventListener('change', openEditPhotoHandler);
 
