@@ -27,8 +27,8 @@ const buttonCommentsLoaderClickHandler = (comments) => {
   if (fullSizeView.querySelector('.social__comments .hidden')) {
     buttonCommentsLoader.classList.remove('hidden');
   }
-  commentCount.textContent = comments.length;
-  startCommentCount.textContent = Math.min(comments.length - Array.from(fullSizeView.querySelectorAll('.social__comments .hidden')).length, comments.length);
+  startCommentCount.textContent = String(Math.min(comments.length - Array.from(fullSizeView.querySelectorAll('.social__comments .hidden')).length, comments.length));
+  console.log(fullSizeView.querySelectorAll('.social__comments .hidden'));
 };
 
 const renderFullSizePhoto = (url, description, likes, comments) => {
@@ -37,7 +37,7 @@ const renderFullSizePhoto = (url, description, likes, comments) => {
   fullSizePhotoSocial.querySelector('.likes-count').textContent = likes;
   fullSizePhotoSocial.querySelector('.social__caption').textContent = description;
   commentCount.textContent = comments.length;
-  startCommentCount.textContent = Math.min(comments.length - Array.from(fullSizeView.querySelectorAll('.social__comments .hidden')).length, comments.length);
+  startCommentCount.textContent = String(Math.min(QUANTITY_COMMENTS, comments.length));
   containerForComments.textContent = '';
   comments.forEach((comment, index) => {
     const commentElement = similarCommentTemplate.cloneNode(true);
@@ -47,9 +47,8 @@ const renderFullSizePhoto = (url, description, likes, comments) => {
     if (index >= 5) {
       commentElement.classList.add('hidden');
     }
-    containerForCommentsFragment.appendChild(commentElement);
+    containerForComments.appendChild(commentElement);
   });
-  containerForComments.appendChild(containerForCommentsFragment);
   buttonCommentsLoader.addEventListener('click', buttonCommentsLoaderClickHandler);
   isCommentOff(comments);
   fullSizeView.addEventListener('click', (evt) => {
