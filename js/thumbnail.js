@@ -1,8 +1,12 @@
+/** @module thumbnail */
 import {renderFullSizePhoto} from './full-size-photo.js';
 const containerForPictures = document.querySelector('.pictures');
 const similarPhotoTemplate = document.querySelector('#picture').content.querySelector('a');
 const containerFragment = document.createDocumentFragment();
-
+/**
+ * создание миниатюры
+ * @param {Object} topic миниатюра с лайками фотками урлом
+ */
 const createSimilarClonedTopics = (topic) => {
   const {url, likes, comments, description} = topic;
   const topicElement = similarPhotoTemplate.cloneNode(true);
@@ -15,6 +19,10 @@ const createSimilarClonedTopics = (topic) => {
   });
   containerFragment.appendChild(topicElement);
 };
+/**
+ * отрисовка решетки с миниатюрами
+ * @param {Array} similarTopics массив миниатюр
+ */
 const renderThumbnails = (similarTopics) => {
   similarTopics.forEach((topic) => {createSimilarClonedTopics(topic);});
   containerForPictures.appendChild(containerFragment);

@@ -1,13 +1,17 @@
+/** @module full-size-photo */
 const fullSizeView = document.querySelector('.big-picture');
 const fullSizePhoto = fullSizeView.querySelector('.big-picture__img');
 const fullSizePhotoSocial = fullSizeView.querySelector('.big-picture__social');
 const buttonCommentsLoader = fullSizeView.querySelector('.comments-loader');
 const containerForComments = document.querySelector('.social__comments');
 const similarCommentTemplate = containerForComments.querySelector('.social__comment');
-const containerForCommentsFragment = document.createDocumentFragment();
 const QUANTITY_COMMENTS = 5;
 const commentCount = fullSizePhotoSocial.querySelector('.comments-count');
 const startCommentCount = fullSizePhotoSocial.querySelector('.start-comments-count');
+/**
+ * отключение кнопки загрузки комментов, если комменты закончились
+ * @param {Array} comments комменты
+ */
 const isCommentOff = (comments) => {
   if (fullSizeView.getElementsByClassName('social__comment')[comments.length-1].className.split(' ').indexOf('hidden') >= 0) {
     buttonCommentsLoader.classList.remove('hidden');
@@ -16,10 +20,9 @@ const isCommentOff = (comments) => {
   }
 };
 
-
-const buttonCommentsLoaderClickHandler = (comments) => {
-  Array.from(document.querySelectorAll('.social__comments .hidden')).forEach((el, ndx) => {
-    if (ndx <=4) {
+const buttonCommentsLoaderClickHandler = () => {
+  Array.from(fullSizeView.querySelectorAll('.social__comments .hidden')).forEach((el, ndx) => {
+    if (ndx < QUANTITY_COMMENTS) {
       el.classList.remove('hidden');
     }
   });
@@ -27,10 +30,16 @@ const buttonCommentsLoaderClickHandler = (comments) => {
   if (fullSizeView.querySelector('.social__comments .hidden')) {
     buttonCommentsLoader.classList.remove('hidden');
   }
-  startCommentCount.textContent = String(Math.min(comments.length - Array.from(fullSizeView.querySelectorAll('.social__comments .hidden')).length, comments.length));
-  console.log(fullSizeView.querySelectorAll('.social__comments .hidden'));
+  startCommentCount.textContent = Array.from(fullSizeView.querySelectorAll('.social__comment')).length - Array.from(fullSizeView.querySelectorAll('.social__comments .hidden')).length;
 };
-
+/**
+ * отрисовка полноформатного фото с комментами
+ * @param {string} url урл
+ * @param {string} description описание фото
+ * @param {number} likes количество лайков
+ * @param {Array} comments комментарии к фотке
+ * @returns {Element} нода большой картинки
+ */
 const renderFullSizePhoto = (url, description, likes, comments) => {
   fullSizeView.classList.remove('hidden');
   fullSizePhoto.querySelector('img').src = url;
@@ -62,7 +71,7 @@ const renderFullSizePhoto = (url, description, likes, comments) => {
 
 const buttonCloseFullSizePhoto = fullSizeView.querySelector('.big-picture__cancel');
 
-document.addEventListener('keydown', (evt) => {
+document.body.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     fullSizeView.classList.add('hidden');
     document.body.classList.remove('modal-open');
