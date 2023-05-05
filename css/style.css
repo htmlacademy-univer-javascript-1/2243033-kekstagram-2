@@ -1395,3 +1395,13 @@ main {
 .hidden {
   display: none;
 }
+
+.form__error {
+  color: red;
+  text-transform: initial;
+  margin: -10px 0 20px;
+}
+
+.remaining {
+  text-transform: initial;
+}

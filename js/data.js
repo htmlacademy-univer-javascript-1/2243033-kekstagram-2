@@ -1,3 +1,4 @@
+/** @module data */
 import {getRandomElementOfArray, getRandomNumber} from './util.js';
 
 const MESSAGES = [
