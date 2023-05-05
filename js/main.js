@@ -1,6 +1,8 @@
-import {similarTopics} from './data.js';
-import './thumbnail.js';
+import {createSimilarTopics} from './data.js';
+import {renderThumbnails} from './thumbnail.js';
+import './form-edit-photo.js';
 
-// eslint-disable-next-line no-console
-console.log(similarTopics);
+const TOPIC_COUNT = 25;
+const similarTopics = createSimilarTopics(TOPIC_COUNT);
 
+renderThumbnails(similarTopics);

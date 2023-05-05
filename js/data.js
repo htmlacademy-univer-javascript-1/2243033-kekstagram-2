@@ -1,6 +1,5 @@
 import {getRandomElementOfArray, getRandomNumber} from './util.js';
 
-const TOPIC_COUNT = 25;
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -24,7 +23,7 @@ const createComment = () => ({
   name: getRandomElementOfArray(NAMES),
 });
 const createTopic = (index) => {
-  const comments = Array.from({length: getRandomNumber(1, 4)}, createComment);
+  const comments = Array.from({length: getRandomNumber(1, 14)}, createComment);
   comments.forEach((comment, ndx) => {
     if (ndx > 0) {/*  первый рандомный ид, далее рандомно от него + 1-5*/
       comment.id = comments[ndx - 1].id + getRandomNumber(1, 5);
@@ -38,7 +37,5 @@ const createTopic = (index) => {
     comments: comments
   };
 };
-
-const similarTopics = Array.from({length: TOPIC_COUNT}, (_, i) => createTopic(i));
-
-export {similarTopics};
+const createSimilarTopics = (cnt) => Array.from({length: cnt}, (_, i) => createTopic(i));
+export {createSimilarTopics};
