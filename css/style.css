@@ -1408,3 +1408,9 @@ main {
 .hidden {
   display: none;
 }
+
+.form__error {
+  color: red;
+  margin: -5px 0 15px;
+  text-transform: initial;
+}

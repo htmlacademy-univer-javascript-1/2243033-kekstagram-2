@@ -1,4 +1,7 @@
 /** @module form-edit-photo */
+import './scale-photo.js';
+import './effects.js';
+
 const formEditPhoto = document.querySelector('.img-upload');
 const controlUploadFile = formEditPhoto.querySelector('#upload-file');
 const elementImgUpload = formEditPhoto.querySelector('.img-upload__overlay');
@@ -55,7 +58,7 @@ function validateHashtagsDouble(value) {
 pristine.addValidator(hashtagsField, validateHashtagsDouble, 'Хэштеги не должны повторяться', 3, false);
 
 /**
- *
+ * проверка на количество хэштегов
  * @param {string} value введенные хэштеги
  * @returns {boolean} истинно если количество хэштегов не больше заданного
  */
@@ -66,7 +69,7 @@ function validateHashtagsQuantity(value) {
 pristine.addValidator(hashtagsField, validateHashtagsQuantity, `Хэштегов должно быть не более ${HASHTAGS_QUANTITY}`, 1, false);
 
 /**
- *
+ * проверка хэштегов на соотвествие регулярке
  * @param value {string} введенные хэштеги
  * @returns {boolean} истинно если каждый хэштег подходит под заданную регулярку
  */
