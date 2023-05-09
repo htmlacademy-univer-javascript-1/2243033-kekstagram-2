@@ -1,4 +1,7 @@
 /** @module form-edit-photo */
+import './scale-photo.js';
+import './effects.js';
+
 const formEditPhoto = document.querySelector('.img-upload');
 const controlUploadFile = formEditPhoto.querySelector('#upload-file');
 const elementImgUpload = formEditPhoto.querySelector('.img-upload__overlay');

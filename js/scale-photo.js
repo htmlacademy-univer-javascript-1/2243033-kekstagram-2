@@ -7,7 +7,7 @@ const buttonSmallerHandler = () => {
     return;
   }
   scaleValue.value = `${parseInt(scaleValue.value, 10) - 25}%`;
-  imageUploadPreview.style.transform = `scale(${parseInt(scaleValue.value, 10)/100})`;
+  imageUploadPreview.querySelector('img').style.transform = `scale(${parseInt(scaleValue.value, 10)/100})`;
 };
 
 buttonSmaller.addEventListener('click', buttonSmallerHandler);
@@ -17,7 +17,7 @@ const buttonBiggerHandler = () => {
     return;
   }
   scaleValue.value = `${parseInt(scaleValue.value, 10) + 25}%`;
-  imageUploadPreview.style.transform = `scale(${parseInt(scaleValue.value, 10)/100})`;
+  imageUploadPreview.querySelector('img').style.transform = `scale(${parseInt(scaleValue.value, 10)/100})`;
 };
 
 buttonBigger.addEventListener('click', buttonBiggerHandler);
