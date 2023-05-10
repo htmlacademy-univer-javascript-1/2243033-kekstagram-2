@@ -13,7 +13,6 @@ const hashtagsField = formEditPhoto.querySelector('.text__hashtags');
 const commentField = formEditPhoto.querySelector('.text__description');
 const remaining = formEditPhoto.querySelector('.remaining');
 const successLoadTemplate = document.querySelector('#success').content.querySelector('section');
-const buttonSuccessClose = document.querySelector('.success__button');
 const popupEscKeydownHandler = (evt) => {
   if (evt.key === 'Escape' && hashtagsField !== document.activeElement && commentField !== document.activeElement) {
     evt.preventDefault();
@@ -101,6 +100,7 @@ const setFormEditPhotoSubmit =(onSuccess) => {
           closeEditPhotoHandler();
           const message = successLoadTemplate.cloneNode(true);
           document.body.append(message);
+          const buttonSuccessClose = message.querySelector('.success__button');
           buttonSuccessClose.addEventListener('click', () => {
             document.body.removeChild(message);
           });
