@@ -3,7 +3,8 @@ import './scale-photo.js';
 import './effects.js';
 import {blockSubmitButton, unblockSubmitButton, showAlert} from './util.js';
 import {sendData} from './api.js';
-
+const HASHTAGS_QUANTITY = 5;
+const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const formEditPhoto = document.querySelector('.img-upload');
 const controlUploadFile = formEditPhoto.querySelector('#upload-file');
 const elementImgUpload = formEditPhoto.querySelector('.img-upload__overlay');
@@ -11,8 +12,8 @@ const buttonCloseEditPhoto = formEditPhoto.querySelector('#upload-cancel');
 const hashtagsField = formEditPhoto.querySelector('.text__hashtags');
 const commentField = formEditPhoto.querySelector('.text__description');
 const remaining = formEditPhoto.querySelector('.remaining');
-const HASHTAGS_QUANTITY = 5;
-const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+const successLoadTemplate = document.querySelector('#success').content.querySelector('section');
+const buttonSuccessClose = document.querySelector('.success__button');
 const popupEscKeydownHandler = (evt) => {
   if (evt.key === 'Escape' && hashtagsField !== document.activeElement && commentField !== document.activeElement) {
     evt.preventDefault();
@@ -98,6 +99,11 @@ const setFormEditPhotoSubmit =(onSuccess) => {
           onSuccess();
           unblockSubmitButton();
           closeEditPhotoHandler();
+          const message = successLoadTemplate.cloneNode(true);
+          document.body.append(message);
+          buttonSuccessClose.addEventListener('click', () => {
+            document.body.removeChild(message);
+          });
         },
         () => {
           showAlert('Не удалось отправить форму. Попробуйте ещё раз');
