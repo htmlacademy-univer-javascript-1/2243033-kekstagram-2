@@ -82,6 +82,6 @@ buttonCloseFullSizePhoto.addEventListener('click', closeUserModal);
 function closeUserModal () {
   fullSizeView.classList.add('hidden');
   document.body.classList.remove('modal-open');
-};
+}
 
 export {renderFullSizePhoto, closeUserModal};
