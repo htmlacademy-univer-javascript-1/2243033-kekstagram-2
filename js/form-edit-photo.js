@@ -1,7 +1,10 @@
 /** @module form-edit-photo */
 import './scale-photo.js';
 import './effects.js';
-
+import {blockSubmitButton, unblockSubmitButton, showAlert} from './util.js';
+import {sendData} from './api.js';
+const HASHTAGS_QUANTITY = 5;
+const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const formEditPhoto = document.querySelector('.img-upload');
 const controlUploadFile = formEditPhoto.querySelector('#upload-file');
 const elementImgUpload = formEditPhoto.querySelector('.img-upload__overlay');
@@ -9,8 +12,7 @@ const buttonCloseEditPhoto = formEditPhoto.querySelector('#upload-cancel');
 const hashtagsField = formEditPhoto.querySelector('.text__hashtags');
 const commentField = formEditPhoto.querySelector('.text__description');
 const remaining = formEditPhoto.querySelector('.remaining');
-const HASHTAGS_QUANTITY = 5;
-const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+const successLoadTemplate = document.querySelector('#success').content.querySelector('section');
 const popupEscKeydownHandler = (evt) => {
   if (evt.key === 'Escape' && hashtagsField !== document.activeElement && commentField !== document.activeElement) {
     evt.preventDefault();
@@ -74,21 +76,46 @@ pristine.addValidator(hashtagsField, validateHashtagsQuantity, `Хэштегов
  * @returns {boolean} истинно если каждый хэштег подходит под заданную регулярку
  */
 function validateHashtagsRe (value) {
-  const hashtags = value.trim().split(' ');
-  return hashtags.every((hashtag) => {
-    hashtag.trim();
-    return RE.test(hashtag);
-  });
+  if (value.length > 1) {
+    const hashtags = value.trim().split(' ');
+    return hashtags.every((hashtag) => {
+      hashtag.trim();
+      return RE.test(hashtag);
+    });
+  } else {
+    return true;
+  }
 }
 pristine.addValidator(hashtagsField, validateHashtagsRe, 'Хэштег должен начинаться с #, быть от 2 до 20 символов и не может содержать спецсимволы', 2, false);
 
-formEditPhoto.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  if (pristine.validate()) {
-    formEditPhoto.querySelector('.img-upload__form').submit();
-  }
-});
+const setFormEditPhotoSubmit =(onSuccess) => {
+  formEditPhoto.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    if (pristine.validate()) {
+      blockSubmitButton();
+      sendData(
+        () => {
+          onSuccess();
+          unblockSubmitButton();
+          closeEditPhotoHandler();
+          const message = successLoadTemplate.cloneNode(true);
+          document.body.append(message);
+          const buttonSuccessClose = message.querySelector('.success__button');
+          buttonSuccessClose.addEventListener('click', () => {
+            document.body.removeChild(message);
+          });
+        },
+        () => {
+          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+          unblockSubmitButton();
+        },
+        new FormData(evt.target),);
+    }
+  });
+};
 
 commentField.addEventListener('keydown', () => {
   remaining.textContent = `осталось символов: ${140-formEditPhoto.querySelector('textarea').value.length}`;
 });
+
+export {setFormEditPhotoSubmit};

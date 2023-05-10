@@ -1,8 +1,12 @@
-import {createSimilarTopics} from './data.js';
 import {renderThumbnails} from './thumbnail.js';
 import './form-edit-photo.js';
+import {getData} from './api.js';
+import {setFormEditPhotoSubmit} from './form-edit-photo.js';
+import {closeUserModal} from './full-size-photo.js';
 
 const TOPIC_COUNT = 25;
-const similarTopics = createSimilarTopics(TOPIC_COUNT);
+getData((topics) => {
+  renderThumbnails(topics.slice(0, TOPIC_COUNT));
+});
 
-renderThumbnails(similarTopics);
+setFormEditPhotoSubmit(closeUserModal);
